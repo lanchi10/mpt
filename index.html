@@ -136,6 +136,13 @@
             color: #FDE68A !important; /* amber-200 for text */
             font-weight: 600;
         }
+        .gallery-image-container {
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .gallery-image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -193,7 +200,7 @@
                         { name: "אלטמן עילי", img: "altman.jpg", initials: "א.ע", birthDate: "05/2008", minutes: "3051", games: 32, goals: 0, starts: 32, yellow: 3, red: 0 },
                         { name: "שפונט ים נתן", img: "yam.jpg", initials: "י.ש", birthDate: "01/2008", minutes: 2719, games: 33, goals: 1, starts: 29, yellow: 6, red: 0 },
                         { name: "קורליאנדסקי בוריס", img: "boris.jpg", initials: "ק.ב", birthDate: "02/2008", minutes: 2250, games: 25, goals: 0, starts: 24, yellow: 7, red: 0 },
-                        { name: "טאירי עידן", img: "taeri.jpg", initials: "ט.ע", birthDate: null, minutes: 2158, games: 28, goals: 0, starts: 23, yellow: 3, red: 0 },
+                        { name: "טאירי עידן", img: "taeri.jpg", initials: "ט.ע", birthDate: "03/2009", minutes: 2158, games: 28, goals: 0, starts: 23, yellow: 3, red: 0 },
                         { name: "שדה דניאל", img: "sade.jpg", initials: "ש.ד", birthDate: "04/2008", minutes: 1968, games: 29, goals: "5 ⚽", starts: 26, yellow: 4, red: 0, highlightGoal: true },
                         { name: "שגב יהונתן", img: "segev.jpg", initials: "ש.י", birthDate: "04/2008", minutes: 1790, games: 23, goals: "6 ⚽", starts: 18, yellow: 5, red: 1, highlightGoal: true },
                         { name: "מגמדוב ישעיהו", img: "megamadov.jpg", initials: "מ.י", birthDate: "04/2008", minutes: 1714, games: 24, goals: 1, starts: 18, yellow: 2, red: 0 },
@@ -203,10 +210,6 @@
                         { name: "שרגאיאן יאיר", img: "shargil.jpg", initials: "ש.י", birthDate: "01/2008", minutes: 1113, games: 17, goals: 0, starts: 11, yellow: 2, red: 1 },
                         { name: "יוספיאן הראל", img: "yosefyan.jpg", initials: "י.ה", birthDate: "01/2008", minutes: 918, games: 17, goals: "8 ⚽", starts: "10 (7 מחליף)", yellow: 1, red: 0, highlightGoal: true },
                         { name: "קורן בן", img: "koren.jpg", initials: "ק.ב", birthDate: "12/2008", minutes: 689, games: 22, goals: "4 ⚽", starts: "6 (16 מחליף)", yellow: 1, red: 0, highlightGoal: true },
-                        { name: "קרלין אלעד", img: "karlin.jpg", initials: "ק.א", birthDate: "09/2008", minutes: 286, games: 3, goals: 0, starts: 3, yellow: 0, red: 0, cleanSheets: true },
-                        { name: "דידי ארז", img: "didierez.jpg", initials: "ד.א", birthDate: "08/2009", minutes: 286, games: 5, goals: 0, starts: "1 (4 מחליף)", yellow: 0, red: 0, cleanSheets: true },
-                        { name: "שמריה נהוראי", img: "shmuel.jpg", initials: "ש.נ", birthDate: "05/2008", minutes: 258, games: 12, goals: 0, starts: "1 (11 מחליף)", yellow: 1, red: 0 },
-                        { name: "בר תמיר", img: "bar.jpg", initials: "ב.ת", birthDate: "12/2009", minutes: 140, games: 7, goals: 0, starts: "0 (7 מחליף)", yellow: 1, red: 0 },
                     ];
 
                     const playersGrid = document.querySelector('#players .grid');
@@ -250,6 +253,64 @@
                         playersGrid.innerHTML += playerCardHTML;
                     });
                 </script>
+            </div>
+            <div class="mt-20 animate-slideInUp delay-600">
+                <h3 class="section-title font-rubik text-3xl md:text-4xl font-bold text-center mb-10 text-amber-300 champion-glow">שחקני נערים ב' ששותפו</h3>
+                <div class="overflow-x-auto bg-slate-800 shadow-2xl rounded-xl">
+                    <table class="min-w-full text-sm text-slate-300">
+                        <thead class="bg-slate-700">
+                            <tr>
+                                <th class="p-4 text-right font-semibold">שם השחקן</th>
+                                <th class="p-4 text-center font-semibold">משחקים</th>
+                                <th class="p-4 text-center font-semibold">דקות משחק</th>
+                                <th class="p-4 text-center font-semibold">הרכב פותח</th>
+                                <th class="p-4 text-center font-semibold">נכנס כמחליף</th>
+                                <th class="p-4 text-center font-semibold">שערים</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700" id="u17-subs-table-body">
+                            <script>
+                                const u17Subs = [
+                                    { name: "חזן רואי", games: 2, minutes: 21, starts: 0, subsIn: 2, goals: 0 },
+                                    { name: "ישעיה אילון", games: 7, minutes: 110, starts: 0, subsIn: 7, goals: 0 },
+                                    { name: "לבנה איתמר", games: 7, minutes: 166, starts: 0, subsIn: 7, goals: 0 },
+                                    { name: "לוי יגל", games: 4, minutes: 76, starts: 0, subsIn: 4, goals: 1 },
+                                    { name: "פלג תומר", games: 1, minutes: 102, starts: 1, subsIn: 0, goals: 0 },
+                                    { name: "קורנבליט יהלי", games: 1, minutes: 95, starts: 1, subsIn: 0, goals: 0 },
+                                    { name: "שמואל נועם", games: 5, minutes: 101, starts: 0, subsIn: 5, goals: 0 },
+                                ];
+                                const u17TableBody = document.getElementById('u17-subs-table-body');
+                                u17Subs.forEach((sub, index) => {
+                                    const rowClass = index % 2 === 0 ? 'bg-slate-800/50' : '';
+                                    const rowHTML = `
+                                        <tr class="${rowClass}">
+                                            <td class="p-3 text-right font-medium">${sub.name}</td>
+                                            <td class="p-3 text-center">${sub.games}</td>
+                                            <td class="p-3 text-center">${sub.minutes}</td>
+                                            <td class="p-3 text-center">${sub.starts}</td>
+                                            <td class="p-3 text-center">${sub.subsIn}</td>
+                                            <td class="p-3 text-center font-semibold ${sub.goals > 0 ? 'text-amber-400' : ''}">${sub.goals}</td>
+                                        </tr>
+                                    `;
+                                    u17TableBody.innerHTML += rowHTML;
+                                });
+                            </script>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mt-20 animate-slideInUp delay-800">
+                <h3 class="section-title font-rubik text-3xl md:text-4xl font-bold text-center mb-10 text-amber-300 champion-glow">רגעים של אליפות</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-slate-800 rounded-xl shadow-2xl overflow-hidden gallery-image-container">
+                        <img src="alifut1.jpg" alt="הקבוצה עם מגן האליפות" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/600x400/0a192f/FFFFFF?text=תמונה+עם+מגן&font=assistant';">
+                        <p class="p-4 text-center text-slate-300 font-semibold">הקבוצה חוגגת עם מגן האליפות</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl shadow-2xl overflow-hidden gallery-image-container">
+                        <img src="alifut2.jpg" alt="שחקני הקבוצה חוגגים זכייה" class="w-full h-auto object-cover" onerror="this.src='https://placehold.co/600x400/0a192f/FFFFFF?text=רגע+הזכייה&font=assistant';">
+                        <p class="p-4 text-center text-slate-300 font-semibold">שמחת הזכייה בסיום המשחק</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -375,12 +436,12 @@
             </div>
 
             <h3 class="font-rubik text-3xl font-bold text-center mb-10 text-amber-300 animate-slideInUp delay-400">הצוות המנצח</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
                 <script>
                     const staff = [
                         { name: "טל מציורו", role: "מאמן הקבוצה", img: "talmachoro.jpg", initials: "ט.מ", quote: "הוביל את הקבוצה בנחישות וחזון אל הפסגה." },
                         { name: "נועם סדן סדרנסקי", role: "עוזר מאמן", img: "noamsadan.jpg", initials: "נ.ס", quote: " יד ימינו של המאמן, תרומה מקצועית אדירה." },
-                        { name: "יוסי בן שטרית", role: "עוזר מאמן", img: "yosibenshitrit.jpg", initials: "י.ב", quote: "ליווי צמוד והכוונה שהיוו חלק בלתי נפרד מההצלחה." },
+                        // { name: "יוסי בן שטרית", role: "עוזר מאמן", img: "yosibenshitrit.jpg", initials: "י.ב", quote: "ליווי צמוד והכוונה שהיוו חלק בלתי נפרד מההצלחה." }, // Removed
                         { name: "נועם שוורץ", role: "אנליסט", img: "noamshwarch.jpg", initials: "נ.ש", quote: "התובנות החדות והניתוח המעמיק סללו את הדרך לניצחונות." }
                     ];
                     const staffGrid = document.querySelector('#achievements .grid'); 
