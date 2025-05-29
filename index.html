@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מכבי פתח תקוה - אלופי נערים א' 2024-25</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #87ceeb);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: firework 3s infinite;
+        }
+
+        @keyframes firework {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(3); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .championship-badge {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1e3c72;
+            padding: 20px 40px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            border: 3px solid #ff8c00;
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h2 {
+            color: #2a5298;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .trophy {
+            font-size: 5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .season-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .season-stat {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .season-stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .season-stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1e3c72;
+            padding: 12px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            max-width: 1600px;
+            margin: 0 auto 50px auto;
+        }
+
+        .player-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1e3c72, #2a5298, #87ceeb);
+        }
+
+        .player-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            border-color: #ffd700;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .player-photo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: 3px solid #ffd700;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-name {
+            flex: 1;
+        }
+
+        .player-name h3 {
+            color: #1e3c72;
+            font-size: 1.6em;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .player-role {
+            color: #2a5298;
+            font-size: 1em;
+            background: linear-gradient(135deg, #e6f3ff, #cce7ff);
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 15px;
+            text-align: center;
+            border-right: 5px solid #2a5298;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: #e9ecef;
+            transform: scale(1.05);
+        }
+
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .highlight-stat { /* This class is for specific highlighted stats, like top scorer goals */
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border-right-color: #ff8c00;
+        }
+
+        .highlight-stat .stat-value {
+            color: #b8860b;
+        }
+         .highlight-stat .stat-label {
+            color: #8B4513; /* Darker label for yellow background */
+        }
+
+
+        .cards-display {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 18px;
+            height: 24px;
+            border-radius: 4px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .yellow-card {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: 1px solid #b8860b;
+        }
+
+        .red-card {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            border: 1px solid #a71e2a;
+        }
+
+        .top-scorer {
+            border: 5px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 237, 78, 0.1));
+        }
+
+        .top-player { /* Used for player with most minutes */
+            border: 5px solid #32cd32;
+            box-shadow: 0 0 25px rgba(50, 205, 50, 0.4);
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.05), rgba(152, 251, 152, 0.1));
+        }
+
+        .team-stats { 
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 1200px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-stats h2 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .team-stats-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .team-stat-item { 
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-stat-value { 
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .team-stat-label { 
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 25px;
+            color: #1e3c72;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .celebration {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.3em;
+            color: #2a5298;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 15px;
+            border-right: 5px solid #2a5298;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .header h2 {
+                font-size: 1.5em;
+            }
+            .players-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .stats-grid { 
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .season-stats { 
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-stats-grid { 
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1e3c72;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-indicator:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.player-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '0';
+                        entry.target.style.transform = 'translateY(50px)';
+                        setTimeout(() => {
+                            entry.target.style.transition = 'all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1)';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, 50); 
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1 }); 
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="fireworks">
+        <div class="firework" style="top: 10%; left: 10%; animation-delay: 0s;"></div>
+        <div class="firework" style="top: 20%; left: 80%; animation-delay: 1s;"></div>
+        <div class="firework" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+        <div class="firework" style="top: 80%; left: 70%; animation-delay: 1.5s;"></div>
+        <div class="firework" style="top: 50%; left: 50%; animation-delay: 0.5s;"></div>
+        <div class="firework" style="top: 30%; left: 30%; animation-delay: 2.5s;"></div>
+    </div>
+
+    <div class="scroll-indicator" onclick="scrollToTop()" title="חזור למעלה">⬆️</div>
+
+    <div class="header">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 20px; flex-wrap: wrap;">
+            <img src="https://upload.wikimedia.org/wikipedia/he/thumb/8/80/Maccabi_Petah_Tikva_Logo.svg/150px-Maccabi_Petah_Tikva_Logo.svg.png" 
+                 alt="לוגו מכבי פתח תקוה" 
+                 style="height: 120px; width: auto;" 
+                 onerror="this.style.display='none'">
+            <div class="championship-badge">🏆 אלופי הליגה 2024-25 🏆</div>
+        </div>
+        <h1>מכבי פתח תקוה</h1>
+        <h2>נערים א' - ליגת על</h2>
+        <div class="trophy">🥇🏆🥇</div>
+        
+        <div class="season-stats">
+            <div class="season-stat">
+                <div class="season-stat-value">1</div>
+                <div class="season-stat-label">מקום בליגה</div>
+            </div>
+            <div class="season-stat">
+                <div class="season-stat-value">84</div>
+                <div class="season-stat-label">נקודות</div>
+            </div>
+            <div class="season-stat">
+                <div class="season-stat-value">26</div>
+                <div class="season-stat-label">ניצחונות</div>
+            </div>
+            <div class="season-stat">
+                <div class="season-stat-value">88</div>
+                <div class="season-stat-label">שערים כובשים</div>
+            </div>
+            <div class="season-stat">
+                <div class="season-stat-value">19</div>
+                <div class="season-stat-label">שערים נספגים</div>
+            </div>
+        </div>
+        
+        <p style="margin-top: 20px; color: #2a5298; font-size: 1.3em; font-weight: bold;">
+            🎉 הגאווה שלנו, העתיד שלהם! 🎉
+        </p>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-button" onclick="scrollToSection('players')">🏃‍♂️ השחקנים</button>
+        <button class="nav-button" onclick="scrollToSection('stats')">📊 סטטיסטיקות</button>
+        <button class="nav-button" onclick="scrollToSection('achievements')">🙏 תודות</button>
+    </div>
+
+    <div class="section" id="players">
+        <h2 style="text-align: center; color: white; font-size: 2.8em; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">סגל השחקנים האלופים</h2>
+        <div class="players-grid">
+            <div class="player-card top-player">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="ramot.jpg" alt="רמות טל" onerror="this.parentElement.innerHTML='ר.ט'">
+                    </div>
+                    <div class="player-name">
+                        <h3>רמות טל</h3>
+                        <div class="player-role">💪 קפטן וסלע איתן</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">3306</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">דקות משחק (שיא!)</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">35</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">משחקים</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">3</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">שערים</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">35</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card top-scorer">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="medina.jpg" alt="מדינה עמית" onerror="this.parentElement.innerHTML='מ.ע'">
+                    </div>
+                    <div class="player-name">
+                        <h3>מדינה עמית</h3>
+                        <div class="player-role">🎯 מלך השערים</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">2793</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">דקות משחק</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">36</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">18</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">שערים ⚽👑</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">33</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card top-scorer">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="winshtain.jpg" alt="וינשטין ליאם" onerror="this.parentElement.innerHTML='ו.ל'">
+                    </div>
+                    <div class="player-name">
+                        <h3>וינשטין ליאם</h3>
+                        <div class="player-role">⚡ חלוץ מחונן</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">2602</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">דקות משחק</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">31</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">14</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">28</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card red-card"></span>
+                </div>
+            </div>
+    
+            <div class="player-card top-scorer">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="tau.jpg" alt="טאו בן" onerror="this.parentElement.innerHTML='ט.ב'">
+                    </div>
+                    <div class="player-name">
+                        <h3>טאו בן</h3>
+                        <div class="player-role">🌪️ כוח התקפי</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">1734</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">דקות משחק</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">26</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">14</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item" style="background: linear-gradient(135deg, #1e3c72, #2a5298) !important;">
+                        <div class="stat-value" style="color: #FFC300 !important;">18</div>
+                        <div class="stat-label" style="color: #f0f0f0 !important;">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="altman.jpg" alt="אלטמן עילי" onerror="this.parentElement.innerHTML='א.ע'">
+                    </div>
+                    <div class="player-name">
+                        <h3>אלטמן עילי</h3>
+                        <div class="player-role">🛡️ שומר הסף</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item highlight-stat"> <div class="stat-value">3051</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="yam.jpg" alt="שפונט ים נתן" onerror="this.parentElement.innerHTML='י.ש'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שפונט ים נתן</h3>
+                        <div class="player-role">🧱 חומה בצורה</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">2719</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">33</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">29</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+    
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="hizmi.jpg" alt="היזמי אורי" onerror="this.parentElement.innerHTML='ה.א'">
+                    </div>
+                    <div class="player-name">
+                        <h3>היזמי אורי</h3>
+                        <div class="player-role">⚙️ מנוע במרכז השדה</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">2495</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">29</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="boris.jpg" alt="קורליאנדסקי בוריס" onerror="this.parentElement.innerHTML='ק.ב'">
+                    </div>
+                    <div class="player-name">
+                        <h3>קורליאנדסקי בוריס</h3>
+                        <div class="player-role">🏰 מגן אמין</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">2250</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">25</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="taeri.jpg" alt="טאירי עידן" onerror="this.parentElement.innerHTML='ט.ע'">
+                    </div>
+                    <div class="player-name">
+                        <h3>טאירי עידן</h3>
+                        <div class="player-role">⚖️ שחקן איזון</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">2158</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="sade.jpg" alt="שדה דניאל" onerror="this.parentElement.innerHTML='ש.ד'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שדה דניאל</h3>
+                        <div class="player-role">🎯 כובש מדויק</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1968</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">29</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">26</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="segev.jpg" alt="שגב יהונתן" onerror="this.parentElement.innerHTML='ש.י'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שגב יהונתן</h3>
+                        <div class="player-role">⚔️ לוחם עקשן</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1790</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card red-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="megamadov.jpg" alt="מגמדוב ישעיהו" onerror="this.parentElement.innerHTML='מ.י'">
+                    </div>
+                    <div class="player-name">
+                        <h3>מגמדוב ישעיהו</h3>
+                        <div class="player-role">💪 כוח שקט</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1714</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="yazen.jpg" alt="וותד יזן" onerror="this.parentElement.innerHTML='ו.י'">
+                    </div>
+                    <div class="player-name">
+                        <h3>וותד יזן</h3>
+                        <div class="player-role">🚀 טורפדו מהיר</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1691</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">23</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card red-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="maykee.jpg" alt="מוגילבסקי מייק" onerror="this.parentElement.innerHTML='מ.מ'">
+                    </div>
+                    <div class="player-name">
+                        <h3>מוגילבסקי מייק</h3>
+                        <div class="player-role">🔄 שחקן רב-תכליתי</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1618</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">30</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span style="color: #32cd32; font-weight: bold;">✓ נקי מכרטיסים</span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="sherf.jpg" alt="שרף בלאו נועם" onerror="this.parentElement.innerHTML='ש.נ'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שרף בלאו נועם</h3>
+                        <div class="player-role">🎭 שחקן מפתיע</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1465</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">34</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">14 פתיחות (20 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="shargil.jpg" alt="שרגאיאן יאיר" onerror="this.parentElement.innerHTML='ש.י'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שרגאיאן יאיר</h3>
+                        <div class="player-role">🎯 שחקן מדויק</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">1113</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">11</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                    <span class="card yellow-card"></span>
+                    <span class="card red-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="yosefyan.jpg" alt="יוספיאן הראל" onerror="this.parentElement.innerHTML='י.ה'">
+                    </div>
+                    <div class="player-name">
+                        <h3>יוספיאן הראל</h3>
+                        <div class="player-role">⚡ כובש מהיר</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">918</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">17</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">8</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">10 פתיחות (7 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="koren.jpg" alt="קורן בן" onerror="this.parentElement.innerHTML='ק.ב'">
+                    </div>
+                    <div class="player-name">
+                        <h3>קורן בן</h3>
+                        <div class="player-role">🔥 כושר גיבוי</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">689</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">22</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item highlight-stat">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">שערים ⚽</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">6 פתיחות (16 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="https://placehold.co/60x60/1e3c72/ffffff?text=ק.א" alt="קרלין אלעד" onerror="this.parentElement.innerHTML='ק.א'">
+                    </div>
+                    <div class="player-name">
+                        <h3>קרלין אלעד</h3>
+                        <div class="player-role">🌟 כוכב עתידי</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">286</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">הרכב פותח</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span style="color: #32cd32; font-weight: bold;">✓ נקי מכרטיסים</span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                         <img src="https://placehold.co/60x60/1e3c72/ffffff?text=ד.א" alt="דידי ארז" onerror="this.parentElement.innerHTML='ד.א'">
+                    </div>
+                    <div class="player-name">
+                        <h3>דידי ארז</h3>
+                        <div class="player-role">🎯 שחקן גיבוי</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">286</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1 פתיחה (4 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span style="color: #32cd32; font-weight: bold;">✓ נקי מכרטיסים</span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="shmuel.jpg" alt="שמריה נהוראי" onerror="this.parentElement.innerHTML='ש.נ'">
+                    </div>
+                    <div class="player-name">
+                        <h3>שמריה נהוראי</h3>
+                        <div class="player-role">🌠 תומך נאמן</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">258</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1 פתיחה (11 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="bar.jpg" alt="בר תמיר" onerror="this.parentElement.innerHTML='ב.ת'">
+                    </div>
+                    <div class="player-name">
+                        <h3>בר תמיר</h3>
+                        <div class="player-role">🎯 חלק מהקבוצה</div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">140</div>
+                        <div class="stat-label">דקות משחק</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">7</div>
+                        <div class="stat-label">משחקים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0</div>
+                        <div class="stat-label">שערים</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">0 פתיחות (7 מחליף)</div>
+                        <div class="stat-label">הרכב/מחליף</div>
+                    </div>
+                </div>
+                <div class="cards-display">
+                    <span class="card yellow-card"></span>
+                </div>
+            </div>
+        </div> </div> <div class="section team-stats" id="achievements">
+        <h2>🙏 תודות והוקרה</h2>
+        <div class="quote">
+            "כל הכבוד למכבי פתח תקווה נערים א' על זכייתכם באליפות לעונת 2024-2025! זוהי הישג מדהים המעיד על עבודה קשה, מסירות וכישרון."
+        </div>
+
+        <h3 style="color: #1e3c72; margin: 30px 0 20px 0; text-align: center; font-size: 2.2em;">👨‍🏫 הצוות המקצועי המוביל</h3>
+        <div class="players-grid" style="margin-bottom: 40px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); max-width: 1000px;">
+            <div class="player-card" style="border: 4px solid #ffd700;">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="talmachoro.jpg" alt="טל מציורו" onerror="this.parentElement.innerHTML='ט.מ'">
+                    </div>
+                    <div class="player-name">
+                        <h3>טל מציורו</h3>
+                        <div class="player-role">מאמן הקבוצה</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #555; margin-top: 15px; font-size: 1.1em;">תודה ענקית על ההובלה המקצועית, האמונה בשחקנים והיכולת להוציא מהם את המיטב בדרך לאליפות!</p>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="noamsadan.jpg" alt="נועם סדן סדרנסקי" onerror="this.parentElement.innerHTML='נ.ס'">
+                    </div>
+                    <div class="player-name">
+                        <h3>נועם סדן סדרנסקי</h3>
+                        <div class="player-role">עוזר מאמן</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #555; margin-top: 15px; font-size: 1.1em;">תודה על התרומה המקצועית, הגיבוי למאמן והעבודה המסורה עם השחקנים.</p>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="yosibenshitrit.jpg" alt="יוסי בן שטרית" onerror="this.parentElement.innerHTML='י.ב'">
+                    </div>
+                    <div class="player-name">
+                        <h3>יוסי בן שטרית</h3>
+                        <div class="player-role">עוזר מאמן</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #555; margin-top: 15px; font-size: 1.1em;">תודה על הליווי הצמוד, ההכוונה והתמיכה למען הצלחת הקבוצה.</p>
+            </div>
+
+            <div class="player-card">
+                <div class="player-header">
+                    <div class="player-photo">
+                        <img src="noamshwarch.jpg" alt="נועם שוורץ" onerror="this.parentElement.innerHTML='נ.ש'">
+                    </div>
+                    <div class="player-name">
+                        <h3>נועם שוורץ</h3>
+                        <div class="player-role">אנליסט</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #555; margin-top: 15px; font-size: 1.1em;">תודה על ניתוח הנתונים המעמיק והתובנות המקצועיות שסייעו לקבוצה.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <div class="quote" style="background: linear-gradient(135deg, #ffd700, #ffed4e); color: #1e3c72; border-right: 5px solid #ff8c00;">
+                "העבודה המשותפת, התמיכה וההכוונה של כל אחד ואחת מכם הובילו את הקבוצה להצלחה מסחררת זו. ההשקעה שלכם בשחקנים ניכרת בתוצאות. שאפו לכולם!"
+            </div>
+        </div>
+    </div> <div class="section team-stats" id="stats">
+        <h2>📊 סטטיסטיקות הקבוצה</h2>
+        <div class="team-stats-grid">
+            <div class="team-stat-item">
+                <div class="team-stat-value">88</div>
+                <div class="team-stat-label">שערים כובשים</div>
+            </div>
+            <div class="team-stat-item">
+                <div class="team-stat-value">19</div>
+                <div class="team-stat-label">שערים נספגים</div>
+            </div>
+            <div class="team-stat-item" style="background: linear-gradient(135deg, #28a745, #218838);"> 
+                <div class="team-stat-value">+69</div>
+                <div class="team-stat-label">יחס שערים</div>
+            </div>
+            <div class="team-stat-item">
+                <div class="team-stat-value">2.59</div>
+                <div class="team-stat-label">ממוצע שערים למשחק</div>
+            </div>
+            <div class="team-stat-item" style="background: linear-gradient(135deg, #ffc107, #e0a800);"> 
+                <div class="team-stat-value">26</div>
+                <div class="team-stat-label">ניצחונות</div>
+            </div>
+            <div class="team-stat-item">
+                <div class="team-stat-value">6</div>
+                <div class="team-stat-label">תיקו</div>
+            </div>
+            <div class="team-stat-item" style="background: linear-gradient(135deg, #dc3545, #c82333);"> 
+                <div class="team-stat-value">2</div>
+                <div class="team-stat-label">הפסדים</div>
+            </div>
+            <div class="team-stat-item" style="background: linear-gradient(135deg, #17a2b8, #138496);"> 
+                <div class="team-stat-value">84</div>
+                <div class="team-stat-label">נקודות סה"כ</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <h3 style="color: #1e3c72; margin-bottom: 20px; font-size: 2em;">🏆 מלכי השערים של הקבוצה 🏆</h3>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div style="background: linear-gradient(135deg, #ffd700, #ffed4e); padding: 20px; border-radius: 15px; min-width: 180px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    <div style="font-size: 2.5em; font-weight: bold; color: #b8860b;">18 ⚽</div>
+                    <div style="color: #b8860b; font-weight: bold; font-size: 1.2em;">מדינה עמית</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #c0c0c0, #e8e8e8); padding: 20px; border-radius: 15px; min-width: 180px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    <div style="font-size: 2.5em; font-weight: bold; color: #555;">14 ⚽</div>
+                    <div style="color: #555; font-weight: bold; font-size: 1.2em;">וינשטין ליאם</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #cd7f32, #daa520); padding: 20px; border-radius: 15px; min-width: 180px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+                    <div style="font-size: 2.5em; font-weight: bold; color: #8B4513;">14 ⚽</div>
+                    <div style="color: #8B4513; font-weight: bold; font-size: 1.2em;">טאו בן</div>
+                </div>
+            </div>
+        </div>
+    </div> <div class="footer">
+        <div class="celebration">🎉🏆🔵🟡🏆🎉</div>
+        <p style="font-size: 1.4em; margin-bottom: 15px;">
+            <strong>מכבי פתח תקוה נערים א' - אלופת ליגת העל 2024-2025!</strong>
+        </p>
+        <p style="font-size: 1.1em;">כל הזכויות שמורות למועדון הכדורגל מכבי פתח תקוה © 2025</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">
+            עוצב באהבה ובגאווה על ידי אוהדי הקבוצה
+        </p>
+    </div>
+</body>
+</html>
