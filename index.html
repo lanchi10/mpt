@@ -186,7 +186,7 @@
                     <a href="#players" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">השחקנים</a>
                     <a href="#gallery" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">גלריית האליפות</a>
                     <a href="#stats" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">הישגי העונה</a>
-                    <a href="#league-table" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">טבלת הליגה</a>
+                    <a href="#player-stats-table" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">סטטיסטיקות שחקנים</a>
                     <a href="#achievements" class="nav-link text-slate-200 hover:text-amber-400 px-3 py-2 rounded-md text-lg font-semibold transition-colors">הצוות והתודות</a>
                 </div>
             </div>
@@ -404,66 +404,72 @@
         </div>
     </section>
 
-    <!-- League Table Section -->
-    <section id="league-table" class="py-20 md:py-28 bg-slate-800/50">
+    <!-- Player Stats Table Section -->
+    <section id="player-stats-table" class="py-20 md:py-28 bg-slate-800/50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title font-rubik text-4xl md:text-5xl font-black text-center mb-16 md:mb-20 text-amber-400 champion-glow animate-slideInUp">נתונים נוספים - טבלת הליגה הסופית</h2>
+            <h2 class="section-title font-rubik text-4xl md:text-5xl font-black text-center mb-16 md:mb-20 text-amber-400 champion-glow animate-slideInUp">נתונים נוספים - סטטיסטיקות שחקנים</h2>
             <div class="overflow-x-auto bg-slate-800 shadow-2xl rounded-xl animate-popIn delay-200">
                 <table class="min-w-full text-sm text-slate-300">
                     <thead class="bg-slate-700">
                         <tr>
-                            <th class="p-4 text-right font-semibold">מיקום</th>
-                            <th class="p-4 text-right font-semibold">קבוצה</th>
-                            <th class="p-4 text-center font-semibold">מש'</th>
-                            <th class="p-4 text-center font-semibold">נצ'</th>
-                            <th class="p-4 text-center font-semibold">תיקו</th>
-                            <th class="p-4 text-center font-semibold">הפ'</th>
+                            <th class="p-4 text-right font-semibold">שם השחקן</th>
+                            <th class="p-4 text-center font-semibold">משחקים</th>
+                            <th class="p-4 text-center font-semibold">דקות</th>
                             <th class="p-4 text-center font-semibold">שערים</th>
-                            <th class="p-4 text-center font-semibold">נק'</th>
+                            <th class="p-4 text-center font-semibold">צהובים</th>
+                            <th class="p-4 text-center font-semibold">אדומים</th>
+                            <th class="p-4 text-center font-semibold">הרכב</th>
+                            <th class="p-4 text-center font-semibold">נכנס</th>
+                            <th class="p-4 text-center font-semibold">הוחלף</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-700">
-                        <script>
-                            const leagueTableData = [
-                                { pos: 1, team: 'מכבי פ"ת כלפו', p: 34, w: 26, d: 6, l: 2, gfga: '88-19', pts: 84, champion: true },
-                                { pos: 2, team: 'מכבי חיפה "עלמני"', p: 34, w: 26, d: 4, l: 4, gfga: '93-34', pts: 82 },
-                                { pos: 3, team: 'הפ\' ת"א צחי בן פורת', p: 34, w: 22, d: 6, l: 6, gfga: '79-39', pts: 72 },
-                                { pos: 4, team: 'מכבי ת"א עודד', p: 34, w: 21, d: 7, l: 6, gfga: '82-23', pts: 70 },
-                                { pos: 5, team: 'הפועל ב"ש', p: 34, w: 15, d: 8, l: 11, gfga: '63-72', pts: 53 },
-                                { pos: 6, team: 'הפ\' כפ"ס "יובי"', p: 34, w: 16, d: 4, l: 14, gfga: '48-47', pts: 52 },
-                                { pos: 7, team: 'מ.ס. אשדוד/ז\'ילבר', p: 34, w: 13, d: 11, l: 10, gfga: '50-42', pts: 50 },
-                                { pos: 8, team: 'הפ\' פתח תקוה ד"ר בכר', p: 34, w: 15, d: 4, l: 15, gfga: '58-57', pts: 49 },
-                                { pos: 9, team: 'בית"ר טוברוק', p: 34, w: 13, d: 8, l: 13, gfga: '39-46', pts: 47 },
-                                { pos: 10, team: 'הפ\' י-ם אורי נתן', p: 34, w: 11, d: 12, l: 11, gfga: '62-55', pts: 45 },
-                                { pos: 11, team: 'הפועל חדרה משה', p: 34, w: 11, d: 9, l: 14, gfga: '42-56', pts: 42 },
-                                { pos: 12, team: 'מכבי נתניה יונתן יוני', p: 34, w: 11, d: 7, l: 16, gfga: '46-56', pts: 40 },
-                                { pos: 13, team: 'בני יהודה ת\'א', p: 34, w: 11, d: 6, l: 17, gfga: '35-38', pts: 39 },
-                                { pos: 14, team: 'הפועל רעננה', p: 34, w: 9, d: 10, l: 15, gfga: '45-54', pts: 37 },
-                                { pos: 15, team: 'הפ\' ניר רמת השרון', p: 34, w: 8, d: 8, l: 18, gfga: '32-61', pts: 32 },
-                                { pos: 16, team: 'הפועל ר"ג', p: 34, w: 6, d: 4, l: 24, gfga: '32-85', pts: 22 },
-                                { pos: 17, team: 'הפועל ק"ש', p: 34, w: 4, d: 9, l: 21, gfga: '34-84', pts: 21 },
-                                { pos: 18, team: 'הפ\' חיפה בן ציון', p: 34, w: 3, d: 7, l: 24, gfga: '26-86', pts: 16 },
-                            ];
-                            const tableBody = document.querySelector('#league-table tbody');
-                            leagueTableData.forEach(row => {
-                                const championClass = row.champion ? 'table-champion-row' : (row.pos % 2 === 0 ? 'bg-slate-800/50' : '');
-                                const rowHTML = `
-                                    <tr class="${championClass}">
-                                        <td class="p-3 text-center">${row.pos}</td>
-                                        <td class="p-3 text-right font-medium">${row.team}</td>
-                                        <td class="p-3 text-center">${row.p}</td>
-                                        <td class="p-3 text-center text-green-400 font-semibold">${row.w}</td>
-                                        <td class="p-3 text-center text-yellow-500 font-semibold">${row.d}</td>
-                                        <td class="p-3 text-center text-red-500 font-semibold">${row.l}</td>
-                                        <td class="p-3 text-center">${row.gfga}</td>
-                                        <td class="p-3 text-center font-bold ${row.champion ? 'text-amber-300' : 'text-slate-100'}">${row.pts}</td>
-                                    </tr>
-                                `;
-                                tableBody.innerHTML += rowHTML;
-                            });
-                        </script>
+                    <tbody class="divide-y divide-slate-700" id="player-stats-table-body">
+                        <!-- Player data will be injected here by JS -->
                     </tbody>
                 </table>
+                 <script>
+                    const detailedPlayers = [
+                        {name: 'מדינה עמית', img: 'medina.jpg', games: 36, goals: 18, yellow_lg: 3, yellow_toto: 0, red: 0, starts: 33, sub_in: 3, sub_out: 21, minutes: 2793},
+                        {name: 'רמות טל', img: 'ramot.jpg', games: 35, goals: 3, yellow_lg: 4, yellow_toto: 0, red: 0, starts: 35, sub_in: 0, sub_out: 1, minutes: 3306},
+                        {name: 'שרף בלאו נועם', img: 'sherf.jpg', games: 34, goals: 8, yellow_lg: 2, yellow_toto: 0, red: 0, starts: 14, sub_in: 20, sub_out: 11, minutes: 1465},
+                        {name: 'שפונט ים נתן', img: 'yam.jpg', games: 33, goals: 1, yellow_lg: 6, yellow_toto: 0, red: 0, starts: 29, sub_in: 4, sub_out: 8, minutes: 2719},
+                        {name: 'אלטמן עילי', img: 'altman.jpg', games: 32, goals: 0, yellow_lg: 3, yellow_toto: 0, red: 0, starts: 32, sub_in: 0, sub_out: 0, minutes: 3051},
+                        {name: 'היזמי אורי', img: 'hizmi.jpg', games: 32, goals: 1, yellow_lg: 11, yellow_toto: 0, red: 0, starts: 29, sub_in: 3, sub_out: 15, minutes: 2495},
+                        {name: 'וינשטין ליאם', img: 'winshtain.jpg', games: 31, goals: 14, yellow_lg: 4, yellow_toto: 0, red: 1, starts: 28, sub_in: 3, sub_out: 10, minutes: 2602},
+                        {name: 'מוגילבסקי מייק', img: 'maykee.jpg', games: 30, goals: 2, yellow_lg: 0, yellow_toto: 0, red: 0, starts: 17, sub_in: 13, sub_out: 15, minutes: 1618},
+                        {name: 'שדה דניאל', img: 'sade.jpg', games: 29, goals: 5, yellow_lg: 4, yellow_toto: 0, red: 0, starts: 26, sub_in: 3, sub_out: 20, minutes: 1968},
+                        {name: 'טאירי עידן', img: 'taeri.jpg', games: 28, goals: 0, yellow_lg: 3, yellow_toto: 0, red: 0, starts: 23, sub_in: 5, sub_out: 6, minutes: 2158},
+                        {name: 'טאו בן', img: 'tau.jpg', games: 26, goals: 14, yellow_lg: 3, yellow_toto: 0, red: 0, starts: 18, sub_in: 8, sub_out: 11, minutes: 1734},
+                        {name: 'קורליאנדסקי בוריס', img: 'boris.jpg', games: 25, goals: 0, yellow_lg: 7, yellow_toto: 0, red: 0, starts: 24, sub_in: 1, sub_out: 4, minutes: 2250},
+                        {name: 'מגמדוב ישעיהו', img: 'megamadov.jpg', games: 24, goals: 1, yellow_lg: 2, yellow_toto: 0, red: 0, starts: 18, sub_in: 6, sub_out: 3, minutes: 1714},
+                        {name: 'וותד יזן', img: 'yazen.jpg', games: 23, goals: 6, yellow_lg: 3, yellow_toto: 0, red: 1, starts: 18, sub_in: 5, sub_out: 8, minutes: 1691},
+                        {name: 'שגב יהונתן', img: 'segev.jpg', games: 23, goals: 6, yellow_lg: 5, yellow_toto: 0, red: 1, starts: 18, sub_in: 5, sub_out: 5, minutes: 1790},
+                        {name: 'קורן בן', img: 'koren.jpg', games: 22, goals: 4, yellow_lg: 1, yellow_toto: 0, red: 0, starts: 6, sub_in: 16, sub_out: 5, minutes: 689},
+                        {name: 'יוספיאן הראל', img: 'yosefyan.jpg', games: 17, goals: 8, yellow_lg: 1, yellow_toto: 0, red: 0, starts: 10, sub_in: 7, sub_out: 9, minutes: 918},
+                        {name: 'שרגאיאן יאיר', img: 'shargil.jpg', games: 17, goals: 0, yellow_lg: 2, yellow_toto: 0, red: 1, starts: 11, sub_in: 6, sub_out: 2, minutes: 1113},
+                    ];
+                     const playerStatsTableBody = document.getElementById('player-stats-table-body');
+                    detailedPlayers.forEach((player, index) => {
+                        const rowClass = index % 2 === 0 ? 'bg-slate-800/50' : '';
+                        const rowHTML = `
+                            <tr class="${rowClass}">
+                                <td class="p-3 text-right font-medium flex items-center">
+                                    <img src="${player.img}" class="w-8 h-8 rounded-full ml-3 object-cover" onerror="this.src='https://placehold.co/32x32/1E293B/FFFFFF?text=${player.name[0]}&font=assistant';">
+                                    ${player.name}
+                                </td>
+                                <td class="p-3 text-center">${player.games}</td>
+                                <td class="p-3 text-center">${player.minutes.toLocaleString()}</td>
+                                <td class="p-3 text-center font-semibold ${player.goals > 0 ? 'text-amber-400' : ''}">${player.goals}</td>
+                                <td class="p-3 text-center ${player.yellow_lg > 0 ? 'text-yellow-400' : ''}">${player.yellow_lg}</td>
+                                <td class="p-3 text-center ${player.red > 0 ? 'text-red-500' : ''}">${player.red}</td>
+                                <td class="p-3 text-center">${player.starts}</td>
+                                <td class="p-3 text-center">${player.sub_in}</td>
+                                <td class="p-3 text-center">${player.sub_out}</td>
+                            </tr>
+                        `;
+                        playerStatsTableBody.innerHTML += rowHTML;
+                    });
+                </script>
             </div>
         </div>
     </section>
